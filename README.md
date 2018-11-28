@@ -1,18 +1,18 @@
-# Init Projesi
+# Init
 Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
 
 **Temel işlevler:** 
 * ilk kurulum işlemleri
 * assetleri yapılandırma
 * http ayarları
-* dosya permission ayarları
 
 ## Kurulum
 
 * Composer ile ekleme
-
+    
     
     composer require dgncan/init
+
 
 * Projenizin kendi ayarlarını injekt edebilmek için şu formatta bir dosyayı init.php adıyla kök dizine yerleştiriniz.
  
@@ -23,7 +23,7 @@ Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
     require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
     
     return  [
-        'application-name'=>'init',
+        'application-name'=>'example-project',
         'update-assets'=>
         [
             'Sample dummy process'=>
@@ -52,8 +52,14 @@ Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
         ],
         'update-http-conf'=>
         [
-            'localConfPath'=>'', //optional
-        ]
+            'confPath'=>[
+                'local'=>'.', // for example: /usr/local/httpd_docs/conf/
+                'test'=>'/work/test/conf/',
+                'preprod'=>'/work/preprod/conf/',
+                'prod'=>'/work/prod/conf/'
+            ]
+        ],
+        'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini'
     ];
  `   
     
