@@ -3,7 +3,7 @@
 require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
 
 return  [
-    'application-name'=>'init',
+    'application-name'=>'example-project',
     'update-assets'=>
     [
         'Sample dummy process'=>
@@ -33,7 +33,7 @@ return  [
     'update-http-conf'=>
     [
         'confPath'=>[
-            'local'=>'/usr/local/httpd_docs/conf/',
+            'local'=>'.', // for example: /usr/local/httpd_docs/conf/
             'test'=>'/work/test/conf/',
             'preprod'=>'/work/preprod/conf/',
             'prod'=>'/work/prod/conf/'
