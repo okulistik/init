@@ -1,0 +1,35 @@
+#!/usr/bin/env php
+<?php
+/**
+ * init
+ *
+ * @author dogancan
+ * Date/Time: 27.11.2018 10:13
+ */
+
+if (PHP_SAPI !== 'cli') {
+    echo 'Warning: Teknolist Init should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+}
+
+if (file_exists(__DIR__.'/../../../autoload.php')) {
+    require __DIR__.'/../../../autoload.php';
+} elseif (file_exists(__DIR__.'/../vendor/autoload.php')) {
+    require __DIR__.'/../vendor/autoload.php';
+}
+
+use Symfony\Component\Console\Application;
+use Init\Command\UpdateAssetsCommand;
+use Init\Command\UpdateHttpConfCommand;
+use Init\Command\FirstInstallCommand;
+
+$application = new Application();
+
+$application = new Application('Teknolist Init', '0.1');
+
+
+// ... register commands
+$application->add(new UpdateAssetsCommand('Update Assets'));
+$application->add(new UpdateHttpConfCommand('Update Http Conf'));
+$application->add(new FirstInstallCommand('First Install'));
+
+$application->run();
