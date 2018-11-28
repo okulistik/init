@@ -8,16 +8,20 @@ Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
 
 ## Kurulum
 
-* Composer ile ekleme
-    
-    
-    composer require dgncan/init
+* Örnek composer.json dosyası
 
+```bash
+    {
+      "require-dev": {
+        "dgncan/init": "dev-master",
+        "dgncan/adminlte-minimal":"dev-master"
+      }
+    }
+```
 
 * Projenizin kendi ayarlarını injekt edebilmek için şu formatta bir dosyayı init.php adıyla kök dizine yerleştiriniz.
  
-`
-
+```php
     <?php
     
     require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
@@ -61,11 +65,13 @@ Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
         ],
         'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini'
     ];
- `   
-    
+```    
     
 ## Kullanım
+Kullanılabilecek komutlarını ve yerleşik yardım dökümanını görmek için:
 
+```bash
     vendor/bin/init 
+```
 
-ile uygulamanın kullanılabilecek komutlarını ve yerleşik yardım dökümanını görebilirsiniz.  
+Örnek proje iskeleti için tests/example-project klasörüne bakınız. 
