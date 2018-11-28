@@ -22,7 +22,6 @@ use Init\Command\UpdateAssetsCommand;
 use Init\Command\UpdateHttpConfCommand;
 use Init\Command\FirstInstallCommand;
 
-$application = new Application();
 
 $application = new Application('Teknolist Init', '0.1');
 

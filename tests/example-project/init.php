@@ -1,6 +1,6 @@
 <?php
 
-require_once 'src/functions.php';
+require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
 
 return  [
     'application-name'=>'init',
@@ -12,8 +12,8 @@ return  [
             },
         'Update adminlte-minimal'=>
             function () {
-                $vendorRoot = __DIR__ . '/vendor/dgncan/adminlte-minimal';
-                $publicRoot =  __DIR__ . '/public/adminlte';
+                $vendorRoot = getcwd() . '/vendor/dgncan/adminlte-minimal';
+                $publicRoot =  getcwd() . '/public/adminlte';
                 $files = [
                     '/dist/css/AdminLTE.min.css',
                     '/dist/css/skins/_all-skins.min.css',

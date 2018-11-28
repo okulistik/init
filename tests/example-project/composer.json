@@ -1,0 +1,6 @@
+{
+  "require-dev":{
+    "dgncan/init": "dev-master",
+    "dgncan/adminlte-minimal":"dev-master"
+  }
+}

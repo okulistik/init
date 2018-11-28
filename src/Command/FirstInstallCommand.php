@@ -32,7 +32,7 @@ class FirstInstallCommand extends Command
 
     protected function setup(SymfonyStyle $io)
     {
-        $initPath = __DIR__.'/../../init.php';
+        $initPath = getcwd().'/init.php';
         if (!@file_exists($initPath)) {
             $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
             exit(1);
