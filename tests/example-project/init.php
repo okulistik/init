@@ -32,6 +32,12 @@ return  [
     ],
     'update-http-conf'=>
     [
-        'localConfPath'=>'', //optional
-    ]
+        'confPath'=>[
+            'local'=>'/usr/local/httpd_docs/conf/',
+            'test'=>'/work/test/conf/',
+            'preprod'=>'/work/preprod/conf/',
+            'prod'=>'/work/prod/conf/'
+        ]
+    ],
+    'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini'
 ];

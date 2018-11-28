@@ -18,6 +18,8 @@ class FirstInstallCommand extends Command
 {
     private $applicationName = '';
 
+    private $prodIniFilePath = '';
+
     protected function configure()
     {
         $this
@@ -37,13 +39,16 @@ class FirstInstallCommand extends Command
             $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
             exit(1);
         }
-        $this->applicationName = (require $initPath)['application-name'];
+        $settings = include $initPath;
+        $this->applicationName = $settings['application-name'];
 
-        if ($this->applicationName == "") {
+        if ($this->applicationName == '') {
             $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
              kaydı yer almalı.  Bakınız: README.md");
             exit(1);
         }
+
+        $this->prodIniFilePath = $settings['prod-ini-file'];
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -55,26 +60,34 @@ class FirstInstallCommand extends Command
 
         $env = $input->getArgument('env') =='' ? 'dev' : $input->getArgument('env');
 
-        $getPath = dirname(__DIR__) . '/env/'.$env.'.ini';
-        # production environment ini si jenkins sunucusunun içinde yer alır.
-        # Root Path = /var/lib/jenkins/workspace-prod-ini/  her projenin kendi ismiyle klasörü vardır.
-        # Bu klasöre ve sunucu giriş yetkisi sadece sistem yöneticisinde
-        if ($env == 'prod') {
-            $getPath = '/var/lib/jenkins/workspace-prod-ini/'.$this->applicationName.'/prod.ini';
+        $getPath = getcwd() . '/env/'.$env.'.ini';
+
+        # It's different because of prod environment includes sensitive data.
+        if ($env == 'prod' && $this->prodIniFilePath != '') {
+            $getPath = $this->prodIniFilePath;
         }
 
         if (!file_exists($getPath)) {
-            $io->error('env klasöründe istenen env dosyasi yok');
+            $io->error('There is no the ini file in "env" directory. getPath:'.$getPath);
             exit(1);
         }
 
         try {
-            if (!$get = @file_get_contents($getPath)) {
-                throw new \Exception('Dosya okunamıyor: '.$getPath);
+            $get = @file_get_contents($getPath);
+            if (!$get) {
+                throw new \Exception('The ini file could not read : "'.$getPath.'"');
             }
-            $putPath = dirname(__DIR__)."/conf/settings-local.ini";
+
+            $confDirPath = getcwd() . "/conf";
+            if (!file_exists($confDirPath)) {
+                if (!@mkdir($confDirPath, 0777, true)) {
+                    throw new \Exception("The conf directory could not created. confDirPath:".$confDirPath);
+                }
+            }
+
+            $putPath = getcwd() . "/conf/settings-local.ini";
             if (!@file_put_contents($putPath, $get)) {
-                throw new \Exception('Dosya yazılamıyor: '.$putPath);
+                throw new \Exception('The ini file could not write: '.$putPath);
             }
         } catch (\Exception $e) {
             $io->error($e->getMessage());
