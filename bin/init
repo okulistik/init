@@ -8,7 +8,7 @@
  */
 
 if (PHP_SAPI !== 'cli') {
-    echo 'Warning: Teknolist Init should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+    echo 'Warning: Init should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
 }
 
 if (file_exists(__DIR__.'/../../../autoload.php')) {
@@ -23,7 +23,7 @@ use Init\Command\UpdateHttpConfCommand;
 use Init\Command\FirstInstallCommand;
 
 
-$application = new Application('Teknolist Init', '0.1');
+$application = new Application('Init', '0.1');
 
 
 // ... register commands
