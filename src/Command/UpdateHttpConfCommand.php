@@ -20,10 +20,10 @@ class UpdateHttpConfCommand extends Command
 
     private $settings = [];
 
-    private $confPathLocal = '';
-    private $confPathTest = '';
-    private $confPathPreprod = '';
-    private $confPathProd = '';
+    private $confPathLocal = '.';
+    private $confPathTest = '.';
+    private $confPathPreprod = '.';
+    private $confPathProd = '.';
 
     protected function configure()
     {
@@ -55,9 +55,17 @@ class UpdateHttpConfCommand extends Command
             exit(1);
         }
 
-        $this->confPathLocal = '/usr/local/httpd_docs/conf/';
-        if (isset($this->settings['confPath']['local']) && $this->settings['confPath']['local'] !=='') {
+        if (isset($this->settings['confPath']['local']) && $this->settings['confPath']['local'] !='') {
             $this->confPathLocal = $this->settings['confPath']['local'];
+        }
+        if (isset($this->settings['confPath']['test']) && $this->settings['confPath']['test'] !='') {
+            $this->confPathTest = $this->settings['confPath']['test'];
+        }
+        if (isset($this->settings['confPath']['preprod']) && $this->settings['confPath']['preprod'] !='') {
+            $this->confPathPreprod = $this->settings['confPath']['preprod'];
+        }
+        if (isset($this->settings['confPath']['prod']) && $this->settings['confPath']['prod'] !='') {
+            $this->confPathProd = $this->settings['confPath']['prod'];
         }
     }
 
