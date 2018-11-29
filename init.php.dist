@@ -1,0 +1,24 @@
+<?php
+
+require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
+
+return  [
+    'application-name'=>'example-project',
+    'update-assets'=>
+    [
+        'Sample dummy process'=>
+            function () {
+                echo "sample dummy processed\n";
+            }
+    ],
+    'update-http-conf'=>
+    [
+        'confPath'=>[
+            'local'=>'.', // for example: /usr/local/httpd_docs/conf/
+            'test'=>'/work/test/conf/',
+            'preprod'=>'/work/preprod/conf/',
+            'prod'=>'/work/prod/conf/'
+        ]
+    ],
+    'prod-ini-file' => ''
+];
