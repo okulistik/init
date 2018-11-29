@@ -1,77 +1,69 @@
 # Init
-Her php projesinde ihtiyaç duyulan console işlemleri için yapılmıştır.
 
-**Temel işlevler:** 
-* ilk kurulum işlemleri
-* assetleri yapılandırma
-* http ayarları
+Init is a console application that helps to make for php projects first configuration and publish etc.
 
-## Kurulum
+## Key Features
+* Update Assets
+* Setting ini file
+* Updating http conf
+* Setting file permissions
 
-* Örnek composer.json dosyası
+## Installation
 
+To install Init by using Composer:
+```bash
+    $ composer require dgncan/init "^0.1"
+```
+
+Example composer.json file:
 ```bash
     {
-      "require-dev": {
-        "dgncan/init": "dev-master",
-        "dgncan/adminlte-minimal":"dev-master"
+      "require": {
+        "dgncan/init": "^0.1",
       }
     }
 ```
 
-* Projenizin kendi ayarlarını injekt edebilmek için şu formatta bir dosyayı init.php adıyla kök dizine yerleştiriniz.
- 
+## Usage
+
+Create an init.php file with the following contents:
+
 ```php
     <?php
     
     require_once __DIR__.'/vendor/dgncan/init/src/functions.php';
     
     return  [
-        'application-name'=>'example-project',
+        'application-name'=>'example-project',  // required
         'update-assets'=>
-        [
+        [   // sample function. look example-project folder for detail example 
             'Sample dummy process'=>
                 function () {
                     echo "sample dummy processed\n";
-                },
-            'Update adminlte-minimal'=>
-                function () {
-                    $vendorRoot = getcwd() . '/vendor/dgncan/adminlte-minimal';
-                    $publicRoot =  getcwd() . '/public/adminlte';
-                    $files = [
-                        '/dist/css/AdminLTE.min.css',
-                        '/dist/css/skins/_all-skins.min.css',
-                        '/bower_components/bootstrap/dist/css/bootstrap.min.css',
-                        '/bower_components/font-awesome/css/font-awesome.min.css',
-                        '/bower_components/font-awesome/fonts/fontawesome-webfont.woff2',
-                        '/bower_components/font-awesome/fonts/fontawesome-webfont.woff',
-                        '/bower_components/font-awesome/fonts/fontawesome-webfont.ttf',
-                        '/dist/img/avatar5.png',
-                        '/bower_components/jquery/dist/jquery.min.js',
-                        '/bower_components/bootstrap/dist/js/bootstrap.min.js',
-                        '/dist/js/adminlte.min.js',
-                    ];
-                    copyFile($files, $publicRoot, $vendorRoot);
                 }
         ],
         'update-http-conf'=>
         [
-            'confPath'=>[
-                'local'=>'.', // for example: /usr/local/httpd_docs/conf/
-                'test'=>'/work/test/conf/',
-                'preprod'=>'/work/preprod/conf/',
-                'prod'=>'/work/prod/conf/'
+            'confPath'=> [
+                'local'=>'.',                     // optional for example: /usr/local/httpd_docs/conf/
+                'test'=>'/work/test/conf/',       // optional
+                'preprod'=>'/work/preprod/conf/', // optional
+                'prod'=>'/work/prod/conf/'        // optional
             ]
         ],
-        'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini'
+        'prod-ini-file' => '/sensitive-data-location-path/init/prod.ini', // optional
+        'permission' =>
+        [
+            'chown'=>'www.www', // optional
+            'chmod'=>'755'      // optional
+        ]
     ];
 ```    
-    
-## Kullanım
-Kullanılabilecek komutlarını ve yerleşik yardım dökümanını görmek için:
 
+Or to create empty init.php :
 ```bash
-    vendor/bin/init 
-```
-
-Örnek proje iskeleti için tests/example-project klasörüne bakınız. 
+     vendor/bin/init init 
+ ```
+    
+## Example Project
+Please look example-project folder to see example project skeleton.
