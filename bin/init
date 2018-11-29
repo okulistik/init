@@ -18,6 +18,7 @@ if (file_exists(__DIR__.'/../../../autoload.php')) {
 }
 
 use Symfony\Component\Console\Application;
+use Init\Command\InitCommand;
 use Init\Command\UpdateAssetsCommand;
 use Init\Command\UpdateHttpConfCommand;
 use Init\Command\FirstInstallCommand;
@@ -27,6 +28,7 @@ $application = new Application('Init', '0.1');
 
 
 // ... register commands
+$application->add(new InitCommand('Initialize for Init'));
 $application->add(new UpdateAssetsCommand('Update Assets'));
 $application->add(new UpdateHttpConfCommand('Update Http Conf'));
 $application->add(new FirstInstallCommand('First Install'));
