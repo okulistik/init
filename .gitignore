@@ -3,6 +3,6 @@ DS_Store
 
 vendor
 
-tests/example-project/vendor/
-tests/example-project/public/
-tests/example-project/composer.lock
+example-project/vendor/
+example-project/public/
+example-project/composer.lock
