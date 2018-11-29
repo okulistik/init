@@ -37,14 +37,19 @@ class PermissionCommand extends Command
             exit(1);
         }
         $settings = include $initPath;
-        $this->chown = $settings['permission']['chown'];
-        $this->chmod = $settings['permission']['chmod'];
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == "") {
             $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
              kaydı yer almalı.  Bakınız: README.md");
             exit(1);
+        }
+
+        if (isset($settings['permission']['chown']) && $settings['permission']['chown'] !=='') {
+            $this->chown = $settings['permission']['chown'];
+        }
+        if (isset($settings['permission']['chmod']) && $settings['permission']['chmod'] !=='') {
+            $this->chmod = $settings['permission']['chmod'];
         }
     }
 
@@ -53,14 +58,27 @@ class PermissionCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $io->title('permissions');
 
-        try {
-            system('chown -R '.$this->chown.' '. getcwd() . '/');
-            system('chmod -R '.$this->chmod.' '. getcwd() . '/');
-        } catch (\Exception $e) {
-            $io->error($e->getMessage());
+        $this->setup($io);
+
+        $io->section('chown');
+        $retval = null;
+        $command = 'chown -R '.$this->chown.' '. getcwd() . '/';
+        $return = system($command, $retval);
+        if ($retval !== 0) {
+            $io->error($return.' command: '.$command);
+            exit(1);
+        }
+        $io->success('OK');
+
+        $io->section('chmod');
+        $retval = null;
+        $command = 'chmod -R '.$this->chmod.' '. getcwd() . '/';
+        $return = @system($command, $retval);
+        if ($retval !== 0) {
+            $io->error($return.' command: '.$command);
             exit(1);
         }
 
-        $io->success('');
+        $io->success('OK');
     }
 }

@@ -39,5 +39,10 @@ return  [
                 'prod'=>'/work/prod/conf/'
             ]
         ],
-    'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini'
+    'prod-ini-file' => '/var/lib/jenkins/workspace-prod-ini/init/prod.ini',
+    'permission' =>
+        [
+            'chown'=>'www.www',
+            'chmod'=>'755'
+        ]
 ];
