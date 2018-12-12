@@ -24,8 +24,10 @@ use Init\Command\UpdateHttpConfCommand;
 use Init\Command\FirstInstallCommand;
 use Init\Command\PermissionCommand;
 
+# set current working directory as main project root directory
+chdir(__DIR__."/../../../../");
 
-$application = new Application('Init', '0.1');
+$application = new Application('Init', '0.3');
 
 
 // ... register commands
