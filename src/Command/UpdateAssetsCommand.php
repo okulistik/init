@@ -17,7 +17,7 @@ class UpdateAssetsCommand extends Command
 {
     private $applicationName = '';
 
-    private $functions = [];
+    private $assets = [];
 
     protected function configure()
     {
@@ -37,7 +37,7 @@ class UpdateAssetsCommand extends Command
             exit(1);
         }
         $settings = include $initPath;
-        $this->functions = $settings['update-assets'];
+        $this->assets = $settings['update-assets'];
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == "") {
@@ -54,13 +54,9 @@ class UpdateAssetsCommand extends Command
 
         $this->setup($io);
 
-        foreach ($this->functions as $name => $function) {
+        foreach ($this->assets as $name => $asset) {
             $io->section($name);
-            try {
-                $function();
-            } catch (\Exception $e) {
-                $io->error($e->getMessage());
-            }
+            copyFiles($asset['files'], $asset['public'], $asset['vendor']);
             $io->success('ok');
         }
     }

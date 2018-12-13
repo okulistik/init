@@ -13,18 +13,19 @@
  * @param $vendorRoot
  * @throws Exception
  */
-function copyFile($files, $publicRoot, $vendorRoot)
+function copyFiles($files, $publicRoot, $vendorRoot)
 {
     foreach ($files as $file) {
-        $dirPath = dirname($publicRoot . $file);
-        if (!file_exists($dirPath)) {
-            if (!@mkdir($dirPath, 0777, true)) {
-                throw new Exception("The directories could not created. dirPath:".$dirPath);
+        $targetPath = getcwd() . $publicRoot . $file;
+        $targetDirPath = dirname($targetPath);
+        if (!file_exists($targetDirPath)) {
+            if (!@mkdir($targetDirPath, 0777, true)) {
+                throw new Exception("The directories could not created. Target dirPath:".$targetDirPath);
             }
         }
-
-        if (!@file_put_contents($publicRoot . $file, file_get_contents($vendorRoot . $file))) {
-            throw new Exception("The files could not copied. Source:". $vendorRoot . $file ." - Target:". $publicRoot . $file);
+        $sourcePath = getcwd() . $vendorRoot . $file;
+        if (!@file_put_contents($targetPath, file_get_contents($sourcePath))) {
+            throw new Exception("The files could not copied. Source:". $sourcePath ." - Target:". $targetPath);
         }
     }
 }
