@@ -27,7 +27,7 @@ use Init\Command\PermissionCommand;
 # set current working directory as main project root directory
 chdir(__DIR__."/../../../../");
 
-$application = new Application('Init', '0.3');
+$application = new Application('Init', '0.4');
 
 
 // ... register commands

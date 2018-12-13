@@ -12,14 +12,14 @@ Init is a console application that helps to make for php projects first configur
 
 To install Init by using Composer:
 ```bash
-    $ composer require dgncan/init "^0.3"
+    $ composer require dgncan/init "^0.4"
 ```
 
 Example composer.json file:
 ```bash
     {
       "require": {
-        "dgncan/init": "^0.3",
+        "dgncan/init": "^0.4",
       }
     }
 ```
