@@ -36,11 +36,15 @@ Create an init.php file with the following contents:
     return  [
         'application-name'=>'example-project',  // required
         'update-assets'=>
-        [   // sample function. look example-project folder for detail example 
-            'Sample dummy process'=>
-                function () {
-                    echo "sample dummy processed\n";
-                }
+        [   // sample items. look example-project folder for detail example 
+            'Update adminlte-minimal'=>[
+                'vendor'=>'/vendor/dgncan/adminlte-minimal',
+                'public'=>'/public/adminlte',
+                'files' => [
+                    '/dist/css/AdminLTE.min.css',
+                    '/dist/css/skins/_all-skins.min.css',
+                ]
+            ]
         ],
         'update-http-conf'=>
         [

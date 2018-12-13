@@ -6,10 +6,15 @@ return  [
     'application-name'=>'example-project',
     'update-assets'=>
     [
-        'Sample dummy process'=>
-            function () {
-                echo "sample dummy processed\n";
-            }
+        // example 
+        'Update adminlte-minimal'=>[
+            'vendor'=>'/vendor/dgncan/adminlte-minimal',
+            'public'=>'/public/adminlte',
+            'files' => [
+                '/dist/css/AdminLTE.min.css',
+                '/dist/css/skins/_all-skins.min.css',
+            ]
+        ]
     ],
     'update-http-conf'=>
     [
