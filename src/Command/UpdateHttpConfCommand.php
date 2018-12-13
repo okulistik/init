@@ -29,11 +29,11 @@ class UpdateHttpConfCommand extends Command
     {
         $this
             ->setName('update:http')
-            ->setDescription('http conf günceller')
-            ->setHelp('Http conf dosyalarını environmenta göre yapılandırır..')
+            ->setDescription('update http alias conf')
+            ->setHelp('update http alias conf.')
         ;
         $this
-            ->addArgument('env', InputArgument::OPTIONAL, 'Environment tercihi. Yapılmazsa default dev dir.')
+            ->addArgument('env', InputArgument::OPTIONAL, 'if not selected, it is Dev as a default.')
         ;
     }
 
@@ -41,7 +41,7 @@ class UpdateHttpConfCommand extends Command
     {
         $initPath = getcwd().'/init.php';
         if (!@file_exists($initPath)) {
-            $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
+            $io->error("It must be the init.php file in root folder. Look: README.md");
             exit(1);
         }
 
@@ -50,8 +50,8 @@ class UpdateHttpConfCommand extends Command
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == '') {
-            $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
-             kaydı yer almalı.  Bakınız: README.md");
+            $io->error("It must write project name in the init.php file. For example: `application-name'=>'PROJECT_NAME' `
+             Look: README.md");
             exit(1);
         }
 

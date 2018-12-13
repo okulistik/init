@@ -24,11 +24,11 @@ class FirstInstallCommand extends Command
     {
         $this
             ->setName('update:ini')
-            ->setDescription('İlk kurulumu yapar. environment settingsleri lokalize eder.')
-            ->setHelp('env klasörlerindeki ini dosyalarından environment a göre seçip yerleştirir.')
+            ->setDescription('make a suitable local file for target environment')
+            ->setHelp('make a suitable local file for target environment')
         ;
         $this
-            ->addArgument('env', InputArgument::OPTIONAL, 'Environment tercihi. Yapılmazsa default dev dir.')
+            ->addArgument('env', InputArgument::OPTIONAL, 'if not selected, it is Dev as a default.')
         ;
     }
 
@@ -36,15 +36,15 @@ class FirstInstallCommand extends Command
     {
         $initPath = getcwd().'/init.php';
         if (!@file_exists($initPath)) {
-            $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
+            $io->error("It must be the init.php file in root folder. Look: README.md");
             exit(1);
         }
         $settings = include $initPath;
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == '') {
-            $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
-             kaydı yer almalı.  Bakınız: README.md");
+            $io->error("It must write project name in the init.php file. For example: `application-name'=>'PROJECT_NAME' `
+             Look: README.md");
             exit(1);
         }
 

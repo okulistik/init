@@ -24,8 +24,8 @@ class PermissionCommand extends Command
     {
         $this
             ->setName('update:permission')
-            ->setDescription('Dosya ve dizin yetkilerini günceller.')
-            ->setHelp('Dosya ve dizin yetkilerini belirlenen kullanıcıya göre düzenler.')
+            ->setDescription('set to permission for file and folder.')
+            ->setHelp('set to permission for file and folder.')
         ;
     }
 
@@ -33,15 +33,15 @@ class PermissionCommand extends Command
     {
         $initPath = getcwd().'/init.php';
         if (!@file_exists($initPath)) {
-            $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
+            $io->error("It must be the init.php file in root folder. Look: README.md");
             exit(1);
         }
         $settings = include $initPath;
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == "") {
-            $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
-             kaydı yer almalı.  Bakınız: README.md");
+            $io->error("It must write project name in the init.php file. For example: `application-name'=>'PROJECT_NAME' `
+             Look: README.md");
             exit(1);
         }
 

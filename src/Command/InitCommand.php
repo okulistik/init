@@ -19,8 +19,8 @@ class InitCommand extends Command
     {
         $this
             ->setName('init')
-            ->setDescription('Kök dizine init.php dosyası oluşturur.')
-            ->setHelp('Kök dizine içi doldurulabilecek init.php dosyası oluşturur.')
+            ->setDescription('creates the init file in the root folder.')
+            ->setHelp('creates the init file in the root folder.')
         ;
     }
 
@@ -31,7 +31,7 @@ class InitCommand extends Command
 
         $initPath = getcwd().'/init.php';
         if (@file_exists($initPath)) {
-            $io->error("Uygulamanızın kök dizininde zaten init.php adında bir dosya var.");
+            $io->error("There is an already init file in the root folder.");
             exit(1);
         }
 

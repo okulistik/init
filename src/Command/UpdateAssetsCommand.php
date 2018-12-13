@@ -23,9 +23,8 @@ class UpdateAssetsCommand extends Command
     {
         $this
             ->setName('update:assets')
-            ->setDescription('Assetstleri günceller')
-            ->setHelp('Assetsleri günceller. vendor klasörlerinden public te ilgili yerlere yerleştirir. 
-            minified işlemleri yapar.')
+            ->setDescription('move assets files to public folder from vendor.')
+            ->setHelp('move assets files to public folder from vendor.')
         ;
     }
 
@@ -33,7 +32,7 @@ class UpdateAssetsCommand extends Command
     {
         $initPath = getcwd().'/init.php';
         if (!@file_exists($initPath)) {
-            $io->error("Uygulamanızın kök dizininde init.php adında bir dosya bulunmalı. Bakınız: README.md");
+            $io->error("It must be the init.php file in root folder. Look: README.md");
             exit(1);
         }
         $settings = include $initPath;
@@ -41,8 +40,8 @@ class UpdateAssetsCommand extends Command
         $this->applicationName = $settings['application-name'];
 
         if ($this->applicationName == "") {
-            $io->error("Uygulamanızın kök dizininde yer alan init.php dosyasında `application-name'=>'PROJE_ADINIZ' `
-             kaydı yer almalı.  Bakınız: README.md");
+            $io->error("It must write project name in the init.php file. For example: `application-name'=>'PROJECT_NAME' `
+             Look: README.md");
             exit(1);
         }
     }
