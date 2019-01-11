@@ -23,11 +23,12 @@ use Init\Command\UpdateAssetsCommand;
 use Init\Command\UpdateHttpConfCommand;
 use Init\Command\FirstInstallCommand;
 use Init\Command\PermissionCommand;
+use Init\Command\UpdateTasksCommand;
 
 # set current working directory as main project root directory
 chdir(__DIR__."/../../../../");
 
-$application = new Application('Init', '0.4');
+$application = new Application('Init', '0.5');
 
 
 // ... register commands
@@ -36,5 +37,6 @@ $application->add(new UpdateAssetsCommand('Update Assets'));
 $application->add(new UpdateHttpConfCommand('Update Http Conf'));
 $application->add(new FirstInstallCommand('First Install'));
 $application->add(new PermissionCommand('Set Permission'));
+$application->add(new UpdateTasksCommand('Run tasks'));
 
 $application->run();
