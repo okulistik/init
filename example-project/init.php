@@ -24,6 +24,13 @@ return  [
                 ]
             ]
         ],
+    'update-tasks'=>
+        [
+            'Sample dummy process'=>
+                function () {
+                    echo "sample dummy processed\n";
+                }
+        ],
     'update-http-conf'=>
         [
             'confPath'=>[
