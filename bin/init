@@ -28,7 +28,7 @@ use Init\Command\UpdateTasksCommand;
 # set current working directory as main project root directory
 chdir(__DIR__."/../../../../");
 
-$application = new Application('Init', '0.5');
+$application = new Application('Init', '0.6');
 
 
 // ... register commands

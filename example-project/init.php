@@ -27,7 +27,8 @@ return  [
     'update-tasks'=>
         [
             'Sample dummy process'=>
-                function () {
+                function ($args) {
+                    print_r($args);
                     echo "sample dummy processed\n";
                 }
         ],
