@@ -35,7 +35,7 @@ return  [
     'update-http-conf'=>
         [
             'confPath'=>[
-                'local'=>'.', // for example: /usr/local/httpd_docs/conf/
+                'local'=>'/work/conf/',
                 'test'=>'/work/test/conf/',
                 'preprod'=>'/work/preprod/conf/',
                 'prod'=>'/work/prod/conf/'

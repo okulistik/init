@@ -6,7 +6,7 @@ return  [
     'application-name'=>'example-project',
     'update-assets'=>
     [
-        // example 
+        // example
         'Update adminlte-minimal'=>[
             'vendor'=>'/vendor/dgncan/adminlte-minimal',
             'public'=>'/public/adminlte',
@@ -27,7 +27,7 @@ return  [
     'update-http-conf'=>
     [
         'confPath'=> [
-            'local'=>'.', // for example: /usr/local/httpd_docs/conf/
+            'local'=>'/work/conf/',
             'test'=>'/work/test/conf/',
             'preprod'=>'/work/preprod/conf/',
             'prod'=>'/work/prod/conf/'

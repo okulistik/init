@@ -126,16 +126,7 @@ class UpdateHttpConfCommand extends Command
 
         $io->section("Restart Apache for Development Environment:");
         if ($env == 'dev') {
-            if (file_exists('/usr/local/httpd_docs/bin/apachectl')) {
-                $cmd = "/usr/local/httpd_docs/bin/apachectl -k restart";
-                system($cmd, $r);
-                if ($r == 1) {
-                    $io->error("Failed Apache Restart");
-                    exit(1);
-                }
-            } else {
-                $io->success("Apache could not found in expected place");
-            }
+            $io->success("Please restart Apache as manuel. If you use Docker restart your docker container.");
         } else {
             $io->success("Only dev");
         }
